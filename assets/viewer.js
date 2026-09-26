@@ -85,11 +85,17 @@ async function main() {
   }
 
   try {
+    // Скачиваем PDF сами одним запросом и отдаём PDF.js готовые данные:
+    // его собственная загрузка на GitHub Pages может зависнуть
+    const response = await fetch(pdfUrl);
+    if (!response.ok) {
+      const err = new Error("HTTP " + response.status);
+      err.name = response.status === 404 ? "MissingPDFException" : "HttpError";
+      throw err;
+    }
+    const data = new Uint8Array(await response.arrayBuffer());
     pdf = await pdfjs.getDocument({
-      url: pdfUrl,
-      // Загружаем файл целиком: частичные запросы (Range) на GitHub Pages иногда зависают
-      disableRange: true,
-      disableStream: true,
+      data,
       cMapUrl: PDFJS + "/cmaps/",
       cMapPacked: true,
       standardFontDataUrl: PDFJS + "/standard_fonts/"
