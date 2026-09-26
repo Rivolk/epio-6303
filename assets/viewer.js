@@ -87,6 +87,9 @@ async function main() {
   try {
     pdf = await pdfjs.getDocument({
       url: pdfUrl,
+      // Загружаем файл целиком: частичные запросы (Range) на GitHub Pages иногда зависают
+      disableRange: true,
+      disableStream: true,
       cMapUrl: PDFJS + "/cmaps/",
       cMapPacked: true,
       standardFontDataUrl: PDFJS + "/standard_fonts/"
