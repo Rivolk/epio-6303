@@ -115,7 +115,7 @@
           const n = data.lectures.filter(function (l) { return l.subject === s.id; }).length;
           return '<a class="result" href="subjects.html?id=' + encodeURIComponent(s.id) + '">' + A.chip(s) +
             '<div class="result-text"><div class="result-title">' + hl(s.name) + '</div><div class="result-sub">' +
-              hl(s.teacher) + " · " + (n ? n + " " + A.plural(n, "лекция", "лекции", "лекций") : "лекций пока нет") + "</div></div>" +
+              (s.teacher ? hl(s.teacher) + " · " : "") + (n ? n + " " + A.plural(n, "лекция", "лекции", "лекций") : "лекций пока нет") + "</div></div>" +
             A.icon("chevron") + "</a>";
         }).join("") + "</div></section>";
     }
