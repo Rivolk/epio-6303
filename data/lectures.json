@@ -9,10 +9,87 @@
     },
     {
       "subject": "law",
+      "topic": 1,
+      "title": "Общество и государство. Социальное назначение права",
+      "date": "2026-09-10",
+      "file": "files/law/tema-1-obshchestvo-i-gosudarstvo.ppt"
+    },
+    {
+      "subject": "law",
       "topic": 2,
       "title": "Нормы права. Источники права",
       "date": "2026-09-21",
-      "file": "files/law/tema-2-normy-i-istochniki-prava.pptx"
+      "file": "files/law/tema-2-normy-i-istochniki-prava.ppt"
+    },
+    {
+      "subject": "law",
+      "topic": 3,
+      "title": "Правонарушение и юридическая ответственность. Правотворчество",
+      "date": "2026-09-21",
+      "file": "files/law/tema-3-pravonarushenie-i-otvetstvennost.ppt"
+    },
+    {
+      "subject": "math",
+      "topic": 1,
+      "title": "Элементы теории множеств",
+      "date": "2026-09-04",
+      "file": "files/math/tema-1-mnozhestva.ppt"
+    },
+    {
+      "subject": "math",
+      "topic": 2,
+      "title": "Предел функции",
+      "date": "2026-09-16",
+      "file": "files/math/tema-2-predel-funkcii.ppt"
+    },
+    {
+      "subject": "history-economy",
+      "topic": 1,
+      "title": "Предмет истории экономики. Экономика древнего мира",
+      "date": "2026-09-17",
+      "file": "files/history-economy/tema-1-predmet-istorii-ekonomiki.ppt"
+    },
+    {
+      "subject": "history-economy",
+      "topic": 2,
+      "title": "Экономическое развитие в эпоху средневековья",
+      "date": "2026-09-17",
+      "file": "files/history-economy/tema-2-srednevekovye.ppt"
+    },
+    {
+      "subject": "history-economy",
+      "topic": 3,
+      "title": "Первоначальное накопление капитала и мануфактурное производство",
+      "date": "2026-09-17",
+      "file": "files/history-economy/tema-3-pervonachalnoe-nakoplenie.pptx"
+    },
+    {
+      "subject": "history-economy",
+      "topic": 4,
+      "title": "Промышленный переворот и индустриализация XVIII–XIX вв.",
+      "date": "2026-09-17",
+      "file": "files/history-economy/tema-4-promyshlennyj-perevorot.ppt"
+    },
+    {
+      "subject": "history-economy",
+      "topic": 5,
+      "title": "Мировое хозяйство в конце XIX — первой трети XX вв.",
+      "date": "2026-09-17",
+      "file": "files/history-economy/tema-5-mirovoe-hozyajstvo.ppt"
+    },
+    {
+      "subject": "history-economy",
+      "topic": 6,
+      "title": "Экономика «государственного социализма»",
+      "date": "2026-09-17",
+      "file": "files/history-economy/tema-6-gosudarstvennyj-socializm.ppt"
+    },
+    {
+      "subject": "history-economy",
+      "topic": 7,
+      "title": "Мировая экономика в послевоенный период",
+      "date": "2026-09-17",
+      "file": "files/history-economy/tema-7-poslevoennyj-period.ppt"
     }
   ]
 }

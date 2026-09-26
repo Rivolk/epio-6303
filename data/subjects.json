@@ -7,41 +7,11 @@
   },
   "subjects": [
     {
-      "id": "microeconomics",
-      "name": "Микроэкономика",
-      "teacher": "ст. преп. Васильева Е.Р.",
-      "practice": "преп. Газиева Н.Д.",
-      "color": "#2563eb",
-      "icon": "chart"
-    },
-    {
-      "id": "law",
-      "name": "Право",
-      "teacher": "доц. Архангельская Е.Г.",
-      "color": "#7c3aed",
-      "icon": "scale"
-    },
-    {
-      "id": "math",
-      "name": "Математический анализ",
-      "teacher": "ст. преп. Машарипов С.И.",
-      "practice": "преп. Рахманова А.М.",
-      "color": "#ea580c",
-      "icon": "sigma"
-    },
-    {
-      "id": "history-econ",
-      "name": "История экономических учений",
-      "teacher": "доц. Холбаева С.Р.",
-      "color": "#0d9488",
-      "icon": "book"
-    },
-    {
-      "id": "institutional",
-      "name": "Институциональная экономика",
-      "teacher": "доц. Нуралиева М.М.",
-      "color": "#db2777",
-      "icon": "landmark"
+      "id": "history-russia",
+      "name": "История России",
+      "teacher": "",
+      "color": "#4338ca",
+      "icon": "flag"
     },
     {
       "id": "entrepreneurship",
@@ -59,11 +29,63 @@
       "icon": "shield"
     },
     {
+      "id": "law",
+      "name": "Право",
+      "teacher": "доц. Архангельская Е.Г.",
+      "color": "#7c3aed",
+      "icon": "scale"
+    },
+    {
+      "id": "history-economy",
+      "name": "История экономики",
+      "teacher": "ст. преп. Васильева Е.Р.",
+      "color": "#b45309",
+      "icon": "hourglass"
+    },
+    {
+      "id": "history-econ",
+      "name": "История экономических учений",
+      "teacher": "доц. Холбаева С.Р.",
+      "color": "#0d9488",
+      "icon": "book"
+    },
+    {
+      "id": "microeconomics",
+      "name": "Микроэкономика",
+      "teacher": "ст. преп. Васильева Е.Р.",
+      "practice": "преп. Газиева Н.Д.",
+      "color": "#2563eb",
+      "icon": "chart"
+    },
+    {
+      "id": "institutional",
+      "name": "Институциональная экономика",
+      "teacher": "доц. Нуралиева М.М.",
+      "color": "#db2777",
+      "icon": "landmark"
+    },
+    {
+      "id": "planning",
+      "name": "Планирование и прогнозирование в экономике",
+      "short": "Планирование и прогнозирование",
+      "teacher": "",
+      "color": "#65a30d",
+      "icon": "pie"
+    },
+    {
       "id": "english",
       "name": "Иностранный язык",
       "teacher": "ст. преп. Абирова Г.Р.",
       "color": "#c026d3",
       "icon": "globe"
+    },
+    {
+      "id": "math",
+      "name": "Математический анализ",
+      "teacher": "ст. преп. Машарипов С.И.",
+      "practice": "преп. Рахманова А.М.",
+      "color": "#ea580c",
+      "icon": "sigma"
     },
     {
       "id": "pe",
