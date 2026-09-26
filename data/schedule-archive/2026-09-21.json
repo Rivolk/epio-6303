@@ -1,0 +1,39 @@
+{
+  "weekStart": "2026-09-21",
+  "note": "Пример архивной недели — замените настоящей или удалите.",
+  "days": [
+    {
+      "date": "2026-09-21",
+      "lessons": [
+        { "pair": 1, "start": "09:00", "end": "10:20", "subject": "microeconomics", "type": "лекция", "room": "3/209", "teacher": "ст. преп. Васильева Е.Р." },
+        { "pair": 2, "start": "10:30", "end": "11:50", "subject": "law", "type": "лекция", "room": "3/209", "teacher": "доц. Архангельская Е.Г." }
+      ]
+    },
+    {
+      "date": "2026-09-22",
+      "lessons": [
+        { "pair": 1, "start": "09:00", "end": "10:20", "subject": "math", "type": "практика", "room": "3/209", "teacher": "преп. Рахманова А.М." },
+        { "pair": 2, "start": "10:30", "end": "11:50", "subject": "entrepreneurship", "type": "практика", "room": "3/207", "teacher": "преп. Тониянц А.Г." }
+      ]
+    },
+    {
+      "date": "2026-09-23",
+      "lessons": [
+        { "pair": 1, "start": "09:00", "end": "10:20", "subject": "history-econ", "type": "лекция", "room": "1/104", "teacher": "доц. Холбаева С.Р." },
+        { "pair": 2, "start": "10:30", "end": "11:50", "subject": "math", "type": "лекция", "room": "3/207", "teacher": "ст. преп. Машарипов С.И." }
+      ]
+    },
+    {
+      "date": "2026-09-24",
+      "dayOff": true,
+      "lessons": []
+    },
+    {
+      "date": "2026-09-25",
+      "lessons": [
+        { "pair": 1, "start": "09:00", "end": "10:20", "subject": "institutional", "type": "лекция", "room": "2/106", "teacher": "доц. Нуралиева М.М." },
+        { "pair": 2, "start": "10:30", "end": "11:50", "subject": "english", "type": "практика", "room": "1/303", "teacher": "ст. преп. Абирова Г.Р." }
+      ]
+    }
+  ]
+}
