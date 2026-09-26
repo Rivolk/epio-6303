@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Презентация — ЭПиО 6303</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="assets/styles.css">
+  <script>try{var t=localStorage.getItem("theme")}catch(e){}document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")</script>
+</head>
+<body class="viewer-body">
+  <header class="viewer-bar">
+    <a class="icon-btn" id="back" href="subjects.html" aria-label="Назад">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
+    </a>
+    <div class="viewer-title">
+      <b id="title">Загрузка…</b>
+      <span id="subtitle">&nbsp;</span>
+    </div>
+    <div class="viewer-tools">
+      <span class="viewer-page" id="page-info"></span>
+      <div class="viewer-zoom">
+        <button class="icon-btn" id="zoom-out" type="button" aria-label="Уменьшить">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/></svg>
+        </button>
+        <button class="icon-btn" id="zoom-in" type="button" aria-label="Увеличить">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
+        </button>
+      </div>
+      <a class="icon-btn" id="download" href="#" download aria-label="Скачать оригинал" title="Скачать оригинал" hidden>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <div id="pages" class="pages" aria-label="Страницы презентации"></div>
+  <a class="btn btn-primary viewer-fab" id="fab" href="#" download hidden></a>
+
+  <script src="assets/app.js"></script>
+  <script type="module" src="assets/viewer.js"></script>
+</body>
+</html>

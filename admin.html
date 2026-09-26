@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Редактор расписания — ЭПиО 6303</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="assets/styles.css">
+  <script>try{var t=localStorage.getItem("theme")}catch(e){}document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")</script>
+</head>
+<body>
+  <main class="page">
+    <div class="page-head fade-in">
+      <h1>Редактор расписания</h1>
+      <p>Заполните неделю, скопируйте готовый JSON и вставьте его в <code>data/schedule.json</code>. Черновик сохраняется в этом браузере автоматически.</p>
+    </div>
+
+    <section class="card admin-panel">
+      <h2>1. Неделя</h2>
+      <p>Проще всего начать с текущей недели и поменять только то, что изменилось.</p>
+      <div class="form-grid">
+        <div class="field">
+          <label for="week-start">Понедельник недели</label>
+          <input class="input" id="week-start" type="date">
+        </div>
+        <div class="field full">
+          <label for="week-note">Заметка для всех (необязательно)</label>
+          <input class="input" id="week-note" type="text" placeholder="Например: в среду пары в корпусе 2">
+        </div>
+      </div>
+      <div class="row-actions">
+        <button class="btn" type="button" id="load-current">Загрузить текущую неделю</button>
+        <button class="btn" type="button" id="load-next">Следующая неделя на основе текущей</button>
+        <button class="btn btn-ghost" type="button" id="clear-all">Очистить всё</button>
+      </div>
+    </section>
+
+    <section class="card admin-panel" id="lesson-form-panel">
+      <h2 id="form-title">2. Добавить пару</h2>
+      <p>Номер пары сам подставит время — его можно поправить вручную.</p>
+      <form id="lesson-form" class="form-grid" autocomplete="off">
+        <div class="field full">
+          <span class="label">День</span>
+          <div class="pair-presets" id="day-picker" role="group" aria-label="День"></div>
+        </div>
+        <div class="field full">
+          <span class="label">Пара</span>
+          <div class="pair-presets" id="pair-picker" role="group" aria-label="Номер пары"></div>
+        </div>
+        <div class="field">
+          <label for="f-start">Начало</label>
+          <input class="input" id="f-start" type="time" required>
+        </div>
+        <div class="field">
+          <label for="f-end">Конец</label>
+          <input class="input" id="f-end" type="time" required>
+        </div>
+        <div class="field full" style="grid-column: 1 / -1">
+          <label for="f-subject">Предмет</label>
+          <select class="select" id="f-subject" required></select>
+        </div>
+        <div class="field">
+          <label for="f-type">Тип</label>
+          <select class="select" id="f-type">
+            <option value="лекция">Лекция</option>
+            <option value="практика">Практика</option>
+            <option value="другое">Другое</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-room">Аудитория</label>
+          <input class="input" id="f-room" type="text" list="rooms" placeholder="3/209">
+          <datalist id="rooms"></datalist>
+        </div>
+        <div class="field full" style="grid-column: 1 / -1">
+          <label for="f-teacher">Преподаватель</label>
+          <input class="input" id="f-teacher" type="text" placeholder="Подставится из предмета">
+        </div>
+        <div class="field full" style="grid-column: 1 / -1">
+          <label for="f-note">Примечание (необязательно)</label>
+          <input class="input" id="f-note" type="text" placeholder="Например: замена, онлайн">
+        </div>
+        <div class="row-actions full" style="margin-top:4px">
+          <button class="btn btn-primary" type="submit" id="submit-btn">Добавить пару</button>
+          <button class="btn btn-ghost" type="button" id="cancel-edit" hidden>Отмена</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><h2>3. Проверьте неделю</h2><span class="subject-count" id="lesson-count"></span></div>
+      <div id="week-preview" class="card list-card"></div>
+    </section>
+
+    <section class="card admin-panel section">
+      <h2>4. Готовый JSON</h2>
+      <p>Скопируйте и полностью замените содержимое файла <code>data/schedule.json</code> — или скачайте файл и положите его вместо старого.</p>
+      <textarea class="textarea" id="output" readonly spellcheck="false" aria-label="Готовый JSON"></textarea>
+      <div class="row-actions">
+        <button class="btn btn-primary" type="button" id="copy">Скопировать JSON</button>
+        <button class="btn" type="button" id="download">Скачать schedule.json</button>
+      </div>
+    </section>
+
+    <section class="card admin-panel section">
+      <h2>Архив</h2>
+      <p>Перед заменой сохраните старую неделю: скачайте файл, положите его в <code>data/schedule-archive/</code> и добавьте дату в <code>index.json</code> в той же папке.</p>
+      <div class="row-actions">
+        <button class="btn" type="button" id="archive-download">Скачать текущую неделю для архива</button>
+      </div>
+      <p id="archive-hint" class="muted" style="margin-top:12px;font-size:14px"></p>
+    </section>
+  </main>
+
+  <script src="assets/app.js"></script>
+  <script src="assets/admin.js"></script>
+</body>
+</html>
