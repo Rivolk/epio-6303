@@ -1,0 +1,92 @@
+{
+  "group": {
+    "name": "ЭПиО 6303",
+    "course": "1 курс",
+    "profile": "Экономика предприятий и организаций",
+    "university": "Ташкентский филиал РЭУ им. Г.В. Плеханова"
+  },
+  "subjects": [
+    {
+      "id": "microeconomics",
+      "name": "Микроэкономика",
+      "teacher": "ст. преп. Васильева Е.Р.",
+      "practice": "преп. Газиева Н.Д.",
+      "color": "#2563eb",
+      "icon": "chart"
+    },
+    {
+      "id": "law",
+      "name": "Право",
+      "teacher": "доц. Архангельская Е.Г.",
+      "color": "#7c3aed",
+      "icon": "scale"
+    },
+    {
+      "id": "math",
+      "name": "Математический анализ",
+      "teacher": "ст. преп. Машарипов С.И.",
+      "practice": "преп. Рахманова А.М.",
+      "color": "#ea580c",
+      "icon": "sigma"
+    },
+    {
+      "id": "history-econ",
+      "name": "История экономических учений",
+      "teacher": "доц. Холбаева С.Р.",
+      "color": "#0d9488",
+      "icon": "book"
+    },
+    {
+      "id": "institutional",
+      "name": "Институциональная экономика",
+      "teacher": "доц. Нуралиева М.М.",
+      "color": "#db2777",
+      "icon": "landmark"
+    },
+    {
+      "id": "entrepreneurship",
+      "name": "Предпринимательство",
+      "teacher": "преп. Тониянц А.Г.",
+      "color": "#ca8a04",
+      "icon": "briefcase"
+    },
+    {
+      "id": "anticorruption",
+      "name": "Государственная антикоррупционная политика",
+      "short": "Антикоррупционная политика",
+      "teacher": "проф. Гойибназаров Ш.Г.",
+      "color": "#dc2626",
+      "icon": "shield"
+    },
+    {
+      "id": "english",
+      "name": "Иностранный язык",
+      "teacher": "ст. преп. Абирова Г.Р.",
+      "color": "#c026d3",
+      "icon": "globe"
+    },
+    {
+      "id": "pe",
+      "name": "Физическая культура",
+      "teacher": "PhD Разуваева И.Ю.",
+      "color": "#16a34a",
+      "icon": "dumbbell"
+    },
+    {
+      "id": "pe-electives",
+      "name": "Элективные дисциплины по физической культуре и спорту",
+      "short": "Элективы по физкультуре",
+      "teacher": "PhD Разуваева И.Ю.",
+      "color": "#0891b2",
+      "icon": "trophy"
+    },
+    {
+      "id": "curator",
+      "name": "Кураторский час",
+      "teacher": "Газиева Нодира Дилмуратовна",
+      "color": "#64748b",
+      "icon": "users",
+      "hideInSubjects": true
+    }
+  ]
+}

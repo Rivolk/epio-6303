@@ -1,0 +1,18 @@
+{
+  "lectures": [
+    {
+      "subject": "microeconomics",
+      "topic": 2,
+      "title": "Основные типы экономических систем",
+      "date": "2026-09-21",
+      "file": "files/microeconomics/tema-2-tipy-ekonomicheskih-sistem.pptx"
+    },
+    {
+      "subject": "law",
+      "topic": 2,
+      "title": "Нормы права. Источники права",
+      "date": "2026-09-21",
+      "file": "files/law/tema-2-normy-i-istochniki-prava.pptx"
+    }
+  ]
+}

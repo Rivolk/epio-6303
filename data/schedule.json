@@ -1,0 +1,44 @@
+{
+  "weekStart": "2026-09-28",
+  "note": "",
+  "days": [
+    {
+      "date": "2026-09-28",
+      "lessons": [
+        { "pair": 1, "start": "09:00", "end": "10:20", "subject": "microeconomics", "type": "лекция", "room": "3/209", "teacher": "ст. преп. Васильева Е.Р." },
+        { "pair": 2, "start": "10:30", "end": "11:50", "subject": "law", "type": "лекция", "room": "3/209", "teacher": "доц. Архангельская Е.Г." },
+        { "pair": 3, "start": "12:30", "end": "13:50", "subject": "pe", "type": "лекция", "room": "Спортзал", "teacher": "PhD Разуваева И.Ю." }
+      ]
+    },
+    {
+      "date": "2026-09-29",
+      "lessons": [
+        { "pair": 1, "start": "09:00", "end": "10:20", "subject": "math", "type": "практика", "room": "3/209", "teacher": "преп. Рахманова А.М." },
+        { "pair": 2, "start": "10:30", "end": "11:50", "subject": "anticorruption", "type": "практика", "room": "3/210", "teacher": "проф. Гойибназаров Ш.Г." },
+        { "pair": 3, "start": "12:30", "end": "13:50", "subject": "entrepreneurship", "type": "практика", "room": "3/207", "teacher": "преп. Тониянц А.Г." }
+      ]
+    },
+    {
+      "date": "2026-09-30",
+      "lessons": [
+        { "pair": 1, "start": "09:00", "end": "10:20", "subject": "history-econ", "type": "лекция", "room": "1/104", "teacher": "доц. Холбаева С.Р." },
+        { "pair": 2, "start": "10:25", "end": "11:45", "subject": "math", "type": "лекция", "room": "3/207", "teacher": "ст. преп. Машарипов С.И." },
+        { "pair": null, "start": "11:50", "end": "12:30", "subject": "curator", "type": "другое", "room": "2/304", "teacher": "Газиева Нодира Дилмуратовна" },
+        { "pair": 3, "start": "12:35", "end": "13:55", "subject": "microeconomics", "type": "практика", "room": "2/304", "teacher": "преп. Газиева Н.Д." }
+      ]
+    },
+    {
+      "date": "2026-10-01",
+      "dayOff": true,
+      "lessons": []
+    },
+    {
+      "date": "2026-10-02",
+      "lessons": [
+        { "pair": 1, "start": "09:00", "end": "10:20", "subject": "pe-electives", "type": "практика", "room": "Спортзал", "teacher": "PhD Разуваева И.Ю." },
+        { "pair": 2, "start": "10:30", "end": "11:50", "subject": "institutional", "type": "лекция", "room": "2/106", "teacher": "доц. Нуралиева М.М." },
+        { "pair": 3, "start": "12:30", "end": "13:50", "subject": "english", "type": "практика", "room": "1/303", "teacher": "ст. преп. Абирова Г.Р." }
+      ]
+    }
+  ]
+}
