@@ -93,7 +93,7 @@ async function main() {
       err.name = response.status === 404 ? "MissingPDFException" : "HttpError";
       throw err;
     }
-    const data = new Uint8Array(await response.arrayBuffer());
+    const data = await readWithProgress(response);
     pdf = await pdfjs.getDocument({
       data,
       cMapUrl: PDFJS + "/cmaps/",
@@ -114,6 +114,36 @@ async function main() {
 
   $fab.hidden = !hasOriginal;
   await buildPages();
+}
+
+// Читаем файл по кусочкам и показываем, сколько уже скачано (на медленном интернете это важно)
+async function readWithProgress(response) {
+  const total = Number(response.headers.get("Content-Length")) || 0;
+  if (!response.body || !response.body.getReader) return new Uint8Array(await response.arrayBuffer());
+  const mb = (n) => (n / 1048576).toFixed(1).replace(".", ",");
+  $pages.innerHTML =
+    '<div class="viewer-state"><div class="spinner"></div>' +
+    '<p id="load-text">Загружаем презентацию…</p>' +
+    (total ? '<div class="progress" style="max-width:260px;margin:14px auto 0"><div id="load-bar" style="width:0%"></div></div>' : "") +
+    "</div>";
+  const $text = document.getElementById("load-text");
+  const $bar = document.getElementById("load-bar");
+  const reader = response.body.getReader();
+  const chunks = [];
+  let received = 0;
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    chunks.push(value);
+    received += value.length;
+    $text.textContent = "Загружаем презентацию… " + mb(received) + (total ? " из " + mb(total) : "") + " МБ";
+    if ($bar) $bar.style.width = Math.min(100, (received / total) * 100).toFixed(1) + "%";
+  }
+  const data = new Uint8Array(received);
+  let offset = 0;
+  for (const chunk of chunks) { data.set(chunk, offset); offset += chunk.length; }
+  $text.textContent = "Открываем…";
+  return data;
 }
 
 async function buildPages() {
