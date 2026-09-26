@@ -5,7 +5,8 @@
 Запуск:  python convert.py          — только новые и изменённые
          python convert.py --all    — пересоздать все PDF заново
 
-Нужен установленный LibreOffice (бесплатно: https://www.libreoffice.org/download/).
+Нужен LibreOffice (бесплатно: https://www.libreoffice.org/download/)
+или, на Windows, установленный Microsoft PowerPoint.
 PDF кладётся рядом с оригиналом, с тем же именем:
     files/law/tema-2.pptx  →  files/law/tema-2.pdf
 
@@ -13,6 +14,7 @@ PDF кладётся рядом с оригиналом, с тем же имен
 каких презентаций там не хватает.
 """
 
+import base64
 import json
 import os
 import shutil
@@ -92,6 +94,77 @@ def convert(soffice, src, profile_dir):
     return None
 
 
+POWERPOINT_SCRIPT = r"""
+[Console]::OutputEncoding = [Text.Encoding]::UTF8
+$ErrorActionPreference = 'Stop'
+$list = Get-Content -LiteralPath '__LIST__' -Encoding UTF8
+try { $app = New-Object -ComObject PowerPoint.Application } catch { 'NOAPP'; exit }
+$interop = $true
+try {
+  Add-Type -AssemblyName Microsoft.Office.Interop.PowerPoint, office
+  $refs = [AppDomain]::CurrentDomain.GetAssemblies() | Where-Object { $_.GetName().Name -in 'Microsoft.Office.Interop.PowerPoint', 'office' } | ForEach-Object { $_.Location }
+  Add-Type -ReferencedAssemblies $refs -TypeDefinition @'
+using Microsoft.Office.Interop.PowerPoint;
+public static class PdfExport {
+  public static void Export(object pres, string path) {
+    ((Presentation)pres).ExportAsFixedFormat(path, PpFixedFormatType.ppFixedFormatTypePDF, PpFixedFormatIntent.ppFixedFormatIntentScreen);
+  }
+}
+'@
+} catch { $interop = $false }
+foreach ($line in $list) {
+  if (-not $line) { continue }
+  $src, $dst = $line -split "`t"
+  try {
+    $p = $app.Presentations.Open($src, -1, 0, 0)
+    # PDF, качество «для экрана» — файлы получаются в разы легче
+    if ($interop) {
+      [PdfExport]::Export($p, $dst)
+    } else {
+      $p.SaveAs($dst, 32)
+    }
+    $p.Close()
+    "OK`t$src"
+  } catch {
+    "ERR`t$src`t$($_.Exception.Message)"
+  }
+}
+$app.Quit()
+"""
+
+
+def convert_with_powerpoint(files):
+    """Windows без LibreOffice: конвертация через установленный PowerPoint.
+    Возвращает словарь {файл: ошибка или None} или None, если PowerPoint нет."""
+    if os.name != "nt":
+        return None
+    with tempfile.TemporaryDirectory(prefix="ppt2pdf-") as tmp:
+        list_file = Path(tmp) / "list.txt"
+        list_file.write_text(
+            "\n".join(f"{p}\t{p.with_suffix('.pdf')}" for p in files), encoding="utf-8"
+        )
+        script = POWERPOINT_SCRIPT.replace("__LIST__", str(list_file).replace("'", "''"))
+        encoded = base64.b64encode(script.encode("utf-16-le")).decode("ascii")
+        try:
+            result = subprocess.run(
+                ["powershell", "-NoProfile", "-NonInteractive", "-EncodedCommand", encoded],
+                capture_output=True, timeout=300 + 120 * len(files),
+            )
+        except (OSError, subprocess.TimeoutExpired):
+            return None
+    output = result.stdout.decode("utf-8", "replace")
+    if "NOAPP" in output:
+        return None
+    status = {}
+    for line in output.splitlines():
+        parts = line.split("\t")
+        if parts[0] == "OK":
+            status[parts[1]] = None
+        elif parts[0] == "ERR":
+            status[parts[1]] = parts[2] if len(parts) > 2 else "ошибка PowerPoint"
+    return {p: status.get(str(p), "PowerPoint не ответил") for p in files}
+
+
 def check_lectures(all_files):
     """Сверяет data/lectures.json с тем, что лежит в files/."""
     try:
@@ -141,25 +214,35 @@ def main():
     print(f"Найдено презентаций: {len(all_files)}. Нужно конвертировать: {len(todo)}.")
 
     if todo:
-        soffice = find_soffice()
-        if not soffice:
-            print("\n✖ LibreOffice не найден.")
-            print("  Скачайте и установите его бесплатно: https://www.libreoffice.org/download/")
-            print("  После установки запустите скрипт ещё раз.")
-            check_lectures(all_files)
-            return 1
-
         errors = 0
-        with tempfile.TemporaryDirectory(prefix="lo-profile-") as profile:
-            for i, src in enumerate(todo, 1):
+        soffice = find_soffice()
+        if soffice:
+            with tempfile.TemporaryDirectory(prefix="lo-profile-") as profile:
+                for i, src in enumerate(todo, 1):
+                    rel = src.relative_to(ROOT).as_posix()
+                    print(f"  [{i}/{len(todo)}] {rel} … ", end="", flush=True)
+                    error = convert(soffice, src, profile)
+                    if error:
+                        errors += 1
+                        print(f"ошибка: {error}")
+                    else:
+                        print("готово")
+        else:
+            print("LibreOffice не найден, пробую через PowerPoint (это может занять пару минут)…")
+            results = convert_with_powerpoint(todo)
+            if results is None:
+                print("\n✖ Не найден ни LibreOffice, ни PowerPoint.")
+                print("  Установите LibreOffice бесплатно: https://www.libreoffice.org/download/")
+                print("  После установки запустите скрипт ещё раз.")
+                check_lectures(all_files)
+                return 1
+            for src, error in results.items():
                 rel = src.relative_to(ROOT).as_posix()
-                print(f"  [{i}/{len(todo)}] {rel} … ", end="", flush=True)
-                error = convert(soffice, src, profile)
                 if error:
                     errors += 1
-                    print(f"ошибка: {error}")
+                    print(f"  {rel} … ошибка: {error}")
                 else:
-                    print("готово")
+                    print(f"  {rel} … готово")
 
         print(f"\nГотово: {len(todo) - errors} из {len(todo)}." + (f" Ошибок: {errors}." if errors else ""))
     else:
